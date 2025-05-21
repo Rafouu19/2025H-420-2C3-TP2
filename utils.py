@@ -1,28 +1,18 @@
-# utils.py
 
 import csv
 import json
 
-def lire_csv(chemin):
-    """
-    Lire un fichier CSV et retourner la liste des lignes.
-    Chaque dictionnaire correspond à une ligne du fichier.
-    """
-    pass
+def lire_csv(chemin: str) -> list[dict]:
+    with open(chemin, encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        return [row for row in reader]
 
-def sauvegarder_json(data, chemin):
-    """
-    Sauvegarder des données dans un fichier JSON.
-    - data : un objet Python (par exemple, un dictionnaire ou une liste)
-    - chemin : chemin du fichier JSON à écrire
-    Utiliser json.dump avec indentation pour que le fichier soit lisible.
-    """
-    pass
 
-def ecrire_texte(contenu, chemin):
-    """
-    Écrire du texte brut dans un fichier texte (.txt).
-    - contenu : texte à écrire
-    - chemin : chemin du fichier texte à créer
-    """
-    pass
+def sauvegarder_json(data, chemin: str) -> None:
+    with open(chemin, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def ecrire_texte(contenu: str, chemin: str) -> None:
+    with open(chemin, 'w', encoding='utf-8') as f:
+        f.write(contenu)
